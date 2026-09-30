@@ -75,6 +75,8 @@ Setting up rainbowcrack (1.8-0kali3) ...
 Notice: Download is performed unsandboxed as root as file '/home/kaled/Desktop/rainbowcrack_1.8-0kali3_amd64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
 ```
 
+The `_apt` notice does not mean installation failed. APT could not read the local `.deb` file as its restricted `_apt` user, so it read the file as root. The `Setting up rainbowcrack` message confirms installation completed; no action is needed.
+
 ### C. Install from Package manager
 
 Sample command if supported in your machine:
