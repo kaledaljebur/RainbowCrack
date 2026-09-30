@@ -1,1 +1,141 @@
+# RainbowCrack teaching materials
 
+RainbowCrack uses precomputed rainbow tables to recover plaintext passwords from hashes. This repository contains Linux and Windows packages for classroom exercises with synthetic passwords and hashes.
+
+## Software
+
+| Platform | Version | Download |
+| --- | --- | --- |
+| Linux x86-64 (Kali package) | 1.8-0kali3 | [Debian package](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack_1.8-0kali3_amd64.deb) |
+| Linux x86-64 | 1.8 | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.8-linux64.zip) |
+| Windows x64 | 1.8 | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/windows/rainbowcrack-1.8-win64.zip) |
+
+All packages use the CPU. The Linux ZIP contains unchanged binaries extracted from the Debian package.
+
+## Linux setup
+
+### ZIP option
+
+Download and extract the ZIP into your exercise folder:
+
+```bash
+cd Desktop
+wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.8-linux64.zip
+unzip rainbowcrack-1.8-linux64.zip
+cd rainbowcrack-1.8-linux64
+./rtgen -h
+./rcrack -h
+```
+
+Keep `charset.txt` and `alglib0.so` beside the executables. This x86-64 build requires glibc, `libstdc++6`, and `libgcc-s1`. If you get an execution permission error, run `chmod u+x rtgen rtsort rcrack rt2rtc rtc2rt rtmerge`.
+
+### Debian package option
+
+On an x86-64 Kali Linux system, open a terminal and download the package into an exercise folder:
+
+```bash
+mkdir -p ~/rainbowcrack-lab
+cd ~/rainbowcrack-lab
+wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack_1.8-0kali3_amd64.deb -O rainbowcrack_1.8-0kali3_amd64.deb
+sudo apt install ./rainbowcrack_1.8-0kali3_amd64.deb
+cp -r /usr/share/rainbowcrack ./rainbowcrack-1.8-linux64
+chmod -R u+w ./rainbowcrack-1.8-linux64
+cd rainbowcrack-1.8-linux64
+./rtgen -h
+./rcrack -h
+```
+
+Use this local copy for the exercise so generated tables are written to your own folder.
+
+## Windows setup
+
+Download the [Windows ZIP](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/windows/rainbowcrack-1.8-win64.zip), then use **Extract All**. Open PowerShell in the extracted `rainbowcrack-1.8-win64` folder, then run:
+
+```powershell
+.\rtgen.exe -h
+.\rcrack.exe -h
+```
+
+Keep the DLL and configuration files beside the executables. The archive also includes `rcrack_gui.exe`.
+
+## Attribution
+
+RainbowCrack is copyright 2020 RainbowCrack Project. Original project: <https://project-rainbowcrack.com/>. Bundled third-party software retains its original notices and terms; this repository does not grant a new license for those binaries. The Windows archive includes `readme.txt`, and the Linux package includes `/usr/share/doc/rainbowcrack/copyright`.
+
+## Scenario: Recover passwords using rainbow tables
+
+You have been given 15 MD5 hashes from password dataset `[hashes.txt](hashes.txt)`. Each password contains exactly five characters using lowercase letters (`a-z`) and digits (`0-9`). Generate a rainbow table, sort it, and use it to recover the passwords.
+
+### Step 1: Get the tools
+
+Follow the Linux or Windows setup instructions above to download the package directly.
+
+On Linux, use `~/Desktop/rainbowcrack-1.8-linux64` as your working folder. On Windows, use the extracted folder containing `rtgen.exe`, keeping its DLL and configuration files together. Keep your generated table and `hashes.txt` in the same working folder.
+
+### Step 2: Generate a rainbow table
+
+Use `rtgen` with the following parameters. Work out the command using `./rtgen -h` on Linux or `.\rtgen.exe -h` on Windows, and inspect `charset.txt` to identify the matching character set (it is in your working folder).
+
+| Parameter | Value |
+| --- | --- |
+| Hash algorithm | MD5 |
+| Minimum password length | 5 |
+| Maximum password length | 5 |
+| Character set | Lowercase letters and digits |
+| Table index | 0 |
+| Chain length | 3800 |
+| Number of chains | 600000 |
+| Part index | 0 |
+
+Wait for generation to finish before continuing. Record how long it takes and the size of the generated `.rt` file.
+
+Sample answer:
+```sh
+./rtgen md5 loweralpha-numeric 5 5 0 3800 600000 0
+```
+
+### Step 3: Sort the table
+
+Use `./rtsort` on Linux or `.\rtsort.exe` on Windows to sort your generated table so that `rcrack` can search it. Run the tool without arguments to inspect its usage, then work out the command for your table.
+
+Sample answer:
+```sh
+./rtsort .
+```
+
+### Step 4: Download and recover the hashes
+
+Download [hashes.txt](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/hashes.txt) into your working folder using the command for your platform below.
+
+Linux:
+
+```bash
+wget 'https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/hashes.txt' -O hashes.txt
+cat hashes.txt
+```
+
+Windows PowerShell:
+
+```powershell
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/hashes.txt' -OutFile hashes.txt
+Get-Content .\hashes.txt
+```
+
+Confirm that the file contains 15 hash values. Use `./rcrack -h` on Linux or `.\rcrack.exe -h` on Windows to find the option for loading a hash list. Work out the command to search your sorted table for the hashes in `hashes.txt`.
+
+
+Sample answer:
+```sh
+./rcrack -help
+./rcrack . -l ./hashes.txt
+```
+
+
+### Record your results
+
+- What commands did you use to generate, sort, and search the table?
+- What passwords did you recover? Match each recovered password to its hash and mark any unrecovered hashes.
+- How long did table generation and password recovery take?
+- Why can the same table be reused for other unsalted MD5 hashes with the same password character set and length?
+
+A single rainbow table does not guarantee recovery of every password. If any hashes remain unrecovered, report them alongside your results.
