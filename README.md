@@ -288,6 +288,13 @@ d3f50fc0e25b248bef228b008ab3553e  v8suc  hex:7638737563
 017bbe96c11b524296c837d5e2b2cb2f  npic9  hex:6e70696339
 ```
 
+To verify a recovered password, calculate its MD5 hash and compare it with the original hash in `hashes.txt`. For example, use `debat`:
+```sh
+kaled@suricata-lab:~/Desktop$ echo -n 'debat' | openssl dgst -md5
+MD5(stdin)= f14b8f9ad9e80ef465f3a30cb17fefb9
+kaled@suricata-lab:~/Desktop$ echo -n 'debat' | md5sum
+f14b8f9ad9e80ef465f3a30cb17fefb9  -
+```
 
 ## Record your results
 
