@@ -23,7 +23,7 @@ All packages use the CPU. The Linux ZIP contains unchanged binaries extracted fr
 Download and extract the ZIP into your exercise folder:
 
 ```bash
-cd Desktop
+cd ~/Desktop
 wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.8-linux64.zip
 unzip rainbowcrack-1.8-linux64.zip
 cd rainbowcrack-1.8-linux64
@@ -38,9 +38,8 @@ Keep `charset.txt` and `alglib0.so` beside the executables. This x86-64 build re
 On an x86-64 Kali Linux system, open a terminal and download the package into an exercise folder:
 
 ```bash
-mkdir -p ~/rainbowcrack-lab
-cd ~/rainbowcrack-lab
-wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack_1.8-0kali3_amd64.deb -O rainbowcrack_1.8-0kali3_amd64.deb
+cd ~/Desktop
+wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack_1.8-0kali3_amd64.deb
 sudo apt install ./rainbowcrack_1.8-0kali3_amd64.deb
 cp -r /usr/share/rainbowcrack ./rainbowcrack-1.8-linux64
 chmod -R u+w ./rainbowcrack-1.8-linux64
@@ -50,6 +49,14 @@ cd rainbowcrack-1.8-linux64
 ```
 
 Use this local copy for the exercise so generated tables are written to your own folder.
+
+### C. Install from Package manager
+
+Sample command if supported in your machine:
+```sh
+sudo apt update && sudo apt install rainbowcrack
+```
+
 
 ## 2. Windows setup
 
