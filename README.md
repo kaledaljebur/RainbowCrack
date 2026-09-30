@@ -2,7 +2,11 @@
 
 RainbowCrack uses precomputed rainbow tables to recover plaintext passwords from hashes. This repository contains Linux and Windows packages for classroom exercises with synthetic passwords and hashes.
 
-## Software
+## Attribution
+
+RainbowCrack is copyright 2020 RainbowCrack Project. Original project: <https://project-rainbowcrack.com/>. Bundled third-party software retains its original notices and terms; this repository does not grant a new license for those binaries. The Windows archive includes `readme.txt`, and the Linux package includes `/usr/share/doc/rainbowcrack/copyright`.
+
+## Packages
 
 | Platform | Version | Download |
 | --- | --- | --- |
@@ -12,9 +16,9 @@ RainbowCrack uses precomputed rainbow tables to recover plaintext passwords from
 
 All packages use the CPU. The Linux ZIP contains unchanged binaries extracted from the Debian package.
 
-## Linux setup
+## 1. Linux setup
 
-### ZIP option
+### A. ZIP option
 
 Download and extract the ZIP into your exercise folder:
 
@@ -29,7 +33,7 @@ cd rainbowcrack-1.8-linux64
 
 Keep `charset.txt` and `alglib0.so` beside the executables. This x86-64 build requires glibc, `libstdc++6`, and `libgcc-s1`. If you get an execution permission error, run `chmod u+x rtgen rtsort rcrack rt2rtc rtc2rt rtmerge`.
 
-### Debian package option
+### B. Debian package option
 
 On an x86-64 Kali Linux system, open a terminal and download the package into an exercise folder:
 
@@ -47,7 +51,7 @@ cd rainbowcrack-1.8-linux64
 
 Use this local copy for the exercise so generated tables are written to your own folder.
 
-## Windows setup
+## 2. Windows setup
 
 Download the [Windows ZIP](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/windows/rainbowcrack-1.8-win64.zip), then use **Extract All**. Open PowerShell in the extracted `rainbowcrack-1.8-win64` folder, then run:
 
@@ -57,10 +61,6 @@ Download the [Windows ZIP](https://raw.githubusercontent.com/kaledaljebur/Rainbo
 ```
 
 Keep the DLL and configuration files beside the executables. The archive also includes `rcrack_gui.exe`.
-
-## Attribution
-
-RainbowCrack is copyright 2020 RainbowCrack Project. Original project: <https://project-rainbowcrack.com/>. Bundled third-party software retains its original notices and terms; this repository does not grant a new license for those binaries. The Windows archive includes `readme.txt`, and the Linux package includes `/usr/share/doc/rainbowcrack/copyright`.
 
 ## Scenario: Recover passwords using rainbow tables
 
