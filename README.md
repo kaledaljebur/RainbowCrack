@@ -27,6 +27,10 @@ cd ~/Desktop
 wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.8-linux64.zip
 unzip rainbowcrack-1.8-linux64.zip
 cd rainbowcrack-1.8-linux64
+```
+
+Check help options:
+```sh
 ./rtgen -h
 ./rcrack -h
 ```
@@ -41,14 +45,35 @@ On an x86-64 Kali Linux system, open a terminal and download the package into an
 cd ~/Desktop
 wget https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack_1.8-0kali3_amd64.deb
 sudo apt install ./rainbowcrack_1.8-0kali3_amd64.deb
-cp -r /usr/share/rainbowcrack ./rainbowcrack-1.8-linux64
-chmod -R u+w ./rainbowcrack-1.8-linux64
-cd rainbowcrack-1.8-linux64
-./rtgen -h
-./rcrack -h
 ```
 
-Use this local copy for the exercise so generated tables are written to your own folder.
+Check help options:
+```sh
+rtgen -h
+rcrack -h
+```
+
+Sample output:
+```sh
+kaled@suricata-lab:~/Desktop$ sudo apt install ./rainbowcrack_1.8-0kali3_amd64.deb 
+[sudo] password for kaled: 
+Note, selecting 'rainbowcrack' instead of './rainbowcrack_1.8-0kali3_amd64.deb'
+Installing:
+  rainbowcrack
+
+Summary:
+  Upgrading: 0, Installing: 1, Removing: 0, Not Upgrading: 341
+  Download size: 0 B / 131 kB
+  Space needed: 509 kB / 52.6 GB available
+
+Get:1 /home/kaled/Desktop/rainbowcrack_1.8-0kali3_amd64.deb rainbowcrack amd64 1.8-0kali3 [131 kB]
+Selecting previously unselected package rainbowcrack.
+(Reading database ... 116689 files and directories currently installed.)
+Preparing to unpack .../rainbowcrack_1.8-0kali3_amd64.deb ...
+Unpacking rainbowcrack (1.8-0kali3) ...
+Setting up rainbowcrack (1.8-0kali3) ...
+Notice: Download is performed unsandboxed as root as file '/home/kaled/Desktop/rainbowcrack_1.8-0kali3_amd64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+```
 
 ### C. Install from Package manager
 
@@ -69,17 +94,17 @@ Download the [Windows ZIP](https://raw.githubusercontent.com/kaledaljebur/Rainbo
 
 Keep the DLL and configuration files beside the executables. The archive also includes `rcrack_gui.exe`.
 
-## Scenario: Recover passwords using rainbow tables
+# Scenario: Recover passwords using rainbow tables
 
 You have been given 15 MD5 hashes from password dataset [hashes.txt](hashes.txt). Each password contains exactly five characters using lowercase letters (`a-z`) and digits (`0-9`). Generate a rainbow table, sort it, and use it to recover the passwords.
 
-### Step 1: Get the tools
+## Step 1: Get the tools
 
 Follow the Linux or Windows setup instructions above to download the package directly.
 
 On Linux, use `~/Desktop/rainbowcrack-1.8-linux64` as your working folder. On Windows, use the extracted folder containing `rtgen.exe`, keeping its DLL and configuration files together. Keep your generated table and `hashes.txt` in the same working folder.
 
-### Step 2: Generate a rainbow table
+## Step 2: Generate a rainbow table
 
 Use `rtgen` with the following parameters. Work out the command using `./rtgen -h` on Linux or `.\rtgen.exe -h` on Windows, and inspect `charset.txt` to identify the matching character set (it is in your working folder).
 
@@ -124,7 +149,7 @@ generating...
 600000 of 600000 rainbow chains generated (0 m 10.2 s)
 ```
 
-### Step 3: Sort the table
+## Step 3: Sort the table
 
 Use `./rtsort` on Linux or `.\rtsort.exe` on Windows to sort your generated table so that `rcrack` can search it. Run the tool without arguments to inspect its usage, then work out the command for your table.
 
@@ -143,7 +168,7 @@ sorting data...
 writing sorted data...
 ```
 
-### Step 4: Download and recover the hashes
+## Step 4: Download and recover the hashes
 
 Download [hashes.txt](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/hashes.txt) into your working folder using the command for your platform below.
 
@@ -262,7 +287,7 @@ d3f50fc0e25b248bef228b008ab3553e  v8suc  hex:7638737563
 ```
 
 
-### Record your results
+## Record your results
 
 - What commands did you use to generate, sort, and search the table?
 - What passwords did you recover? Match each recovered password to its hash and mark any unrecovered hashes.
