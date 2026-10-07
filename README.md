@@ -8,11 +8,12 @@ RainbowCrack is copyright 2020 RainbowCrack Project. Original project: <https://
 
 ## Packages
 
-| Platform | Version | Download |
-| --- | --- | --- |
+| Platform                    | Version    | Download                                                                                                                            |
+| --------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Linux x86-64 (Kali package) | 1.8-0kali3 | [Debian package](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack_1.8-0kali3_amd64.deb) |
-| Linux x86-64 | 1.8 | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.8-linux64.zip) |
-| Windows x64 | 1.8 | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/windows/rainbowcrack-1.8-win64.zip) |
+| Linux x86-64                | 1.8        | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.8-linux64.zip)         |
+| Linux x86-64                | 1.7        | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/linux/rainbowcrack-1.7-linux64.zip)         |
+| Windows x64                 | 1.8        | [ZIP archive](https://raw.githubusercontent.com/kaledaljebur/RainbowCrack/main/packages/windows/rainbowcrack-1.8-win64.zip)         |
 
 All packages use the CPU. The Linux ZIP contains unchanged binaries extracted from the Debian package.
 
@@ -110,16 +111,16 @@ On Linux, use `~/Desktop/rainbowcrack-1.8-linux64` as your working folder. On Wi
 
 Use `rtgen` with the following parameters. Work out the command using `./rtgen -h` on Linux or `.\rtgen.exe -h` on Windows, and inspect `charset.txt` to identify the matching character set (it is in your working folder).
 
-| Parameter | Value |
-| --- | --- |
-| Hash algorithm | MD5 |
-| Minimum password length | 5 |
-| Maximum password length | 5 |
-| Character set | Lowercase letters and digits |
-| Table index | 0 |
-| Chain length | 3800 |
-| Number of chains | 600000 |
-| Part index | 0 |
+| Parameter               | Value                        |
+| ----------------------- | ---------------------------- |
+| Hash algorithm          | MD5                          |
+| Minimum password length | 5                            |
+| Maximum password length | 5                            |
+| Character set           | Lowercase letters and digits |
+| Table index             | 0                            |
+| Chain length            | 3800                         |
+| Number of chains        | 600000                       |
+| Part index              | 0                            |
 
 Wait for generation to finish before continuing. Record how long it takes and the size of the generated `.rt` file.
 
